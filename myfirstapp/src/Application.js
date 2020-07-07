@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Highscore from './Highscore';
+import './css/style.css';
 
 class Application extends Component {
     constructor(props){
@@ -21,16 +23,25 @@ class Application extends Component {
         }
     }
 
+    resetCount = (e) => {
+        console.log("Event is", e)
+        this.setState({
+            count: 0,
+            overTen: false
+        });
+    }
+
     render(){
         let {count} = this.state;
 
         return (
             <div>
                 <h1>You clicked the button {count} times</h1>
-                {(this.state.overTen) ?
-                    <h3>Beat high score of 10!</h3>
-                    : null
-                }
+                <Highscore 
+                    overTen={this.state.overTen}
+                    onReset={this.resetCount}
+                />
+                
                 <span>
                     <button onClick={() => this.handleClick()}>Click Me</button>
                 </span>
